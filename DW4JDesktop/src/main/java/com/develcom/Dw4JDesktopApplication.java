@@ -1,10 +1,7 @@
 package com.develcom;
 
-import com.develcom.cliente.util.Propiedades;
-import com.develcom.cliente.util.RecursosExternos;
 import com.develcom.cliente.util.SesionGlobal;
 import com.develcom.login.Login;
-import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;

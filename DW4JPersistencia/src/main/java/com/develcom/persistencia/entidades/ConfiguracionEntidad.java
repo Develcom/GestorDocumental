@@ -81,9 +81,9 @@ public class ConfiguracionEntidad implements Serializable {
     public ConfiguracionEntidad() {
     }
 
-    public ConfiguracionEntidad(Integer idConfiguracion) {
-        this.idConfiguracion = idConfiguracion;
-    }
+//    public ConfiguracionEntidad(Integer idConfiguracion) {
+//        this.idConfiguracion = idConfiguracion;
+//    }
 
     public Integer getIdConfiguracion() {
         return idConfiguracion;

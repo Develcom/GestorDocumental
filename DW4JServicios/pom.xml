@@ -11,7 +11,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.7.RELEASE</version>
+        <version>1.5.9.RELEASE</version>
         <relativePath/>
         <!-- lookup parent from repository -->
     </parent>
@@ -48,6 +48,21 @@
         </dependency>-->
         
         <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+        </dependency>
+        
+        <dependency>
             <groupId>com.develcom.enlaces</groupId>
             <artifactId>enlaces</artifactId>
             <version>1.0</version>
@@ -56,6 +71,7 @@
             <groupId>com.develcom.persistencia</groupId>
             <artifactId>DW4JPersistencia</artifactId>
             <version>1.0</version>
+            <type>jar</type>
         </dependency>
         
         <dependency>
@@ -78,6 +94,14 @@
             <artifactId>mapstruct-processor</artifactId>
             <version>1.2.0.CR2</version>
         </dependency>
+        
+        <!-- https://mvnrepository.com/artifact/biz.source_code/base64coder -->
+        <dependency>
+            <groupId>biz.source_code</groupId>
+            <artifactId>base64coder</artifactId>
+            <version>2010-12-19</version>
+        </dependency>
+
         
         <!--        <dependency>
             <groupId>fr.xebia.extras</groupId>
@@ -109,17 +133,17 @@
                             <version>1.2.0.CR2</version>
                         </path>
                     </annotationProcessorPaths>
-                <compilerArgs>
-                    <compilerArg>
-                        -Amapstruct.suppressGeneratorTimestamp=true
-                    </compilerArg>
-                    <compilerArg>
-                        -Amapstruct.suppressGeneratorVersionInfoComment=true
-                    </compilerArg>
-<!--                    <compilerArg>
-                        -mapstruct.defaultComponentModel=spring
-                    </compilerArg>-->
-                </compilerArgs>
+                    <compilerArgs>
+                        <compilerArg>
+                            -Amapstruct.suppressGeneratorTimestamp=true
+                        </compilerArg>
+                        <compilerArg>
+                            -Amapstruct.suppressGeneratorVersionInfoComment=true
+                        </compilerArg>
+                        <!--                    <compilerArg>
+                            -mapstruct.defaultComponentModel=spring
+                        </compilerArg>-->
+                    </compilerArgs>
                 </configuration>
             </plugin>
             

@@ -211,7 +211,7 @@ public class Login extends javax.swing.JDialog {
         panelLogo.setLayout(panelLogoLayout);
         panelLogoLayout.setHorizontalGroup(
             panelLogoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 314, Short.MAX_VALUE)
+            .add(0, 326, Short.MAX_VALUE)
         );
         panelLogoLayout.setVerticalGroup(
             panelLogoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -231,7 +231,7 @@ public class Login extends javax.swing.JDialog {
                         .add(jbAceptar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .add(jbSalir, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(panelLogo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -253,7 +253,7 @@ public class Login extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(646, 207));
+        setSize(new java.awt.Dimension(646, 189));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

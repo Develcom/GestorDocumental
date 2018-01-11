@@ -1,7 +1,9 @@
 package com.develcom.servicios.autentica;
 
+import biz.source_code.base64Coder.Base64Coder;
 import com.develcom.enlaces.Configuracion;
 import com.develcom.enlaces.DW4JExcepcion;
+import com.develcom.enlaces.Perfil;
 import com.develcom.enlaces.Sesion;
 import com.develcom.enlaces.Usuario;
 import com.develcom.enlaces.UsuarioLDAP;
@@ -45,7 +47,6 @@ public class AutenticaBFImpl implements AutenticaBF {
     //@Autowired
     //private MapperEntityBo mapperEntityBo = Selma.mapper(MapperEntityBo.class);//mapper(MapperEntityBo.class);
 //    private MapperBuilder<MapperEntityBo> mapperEntityBo = Selma.builder(MapperEntityBo.class);
-    
     @Override
     public Sesion verificarUsuario(String idUsuario, String password) throws DW4JExcepcion {
 
@@ -54,13 +55,15 @@ public class AutenticaBFImpl implements AutenticaBF {
         ConfiguracionEntidad configuracionEntidad;
         Usuario user;
         Configuracion configuracion;
-        String passDecode = "";
         UsuarioLDAP userLDAP;
+
+        configuracionEntidad = configuracionRepositorio.findByIdConfiguracion(1);
 
         if ("dw4jconf".equalsIgnoreCase(idUsuario) || "dw4jdemo".equalsIgnoreCase(idUsuario)) {
 
+            password = Base64Coder.encodeString(password);
+
             usuarioEntidad = usuarioRepositorio.findByIdUsuarioAndPassword(idUsuario, password);
-            configuracionEntidad = configuracionRepositorio.findOne(1l);
 
             if (usuarioEntidad.getPassword().equalsIgnoreCase(usuarioEntidad.getPassword())) {
 
@@ -69,11 +72,10 @@ public class AutenticaBFImpl implements AutenticaBF {
 
 //                user = mapperEntityBo.build().entityToBoU(usuarioEntidad);
 //                configuracion = mapperEntityBo.build().entityToBo(configuracionEntidad);
-
                 sesion.setUsuario(user);
                 sesion.setConfiguracion(configuracion);
             }
-        } else {
+        } else if (configuracionEntidad.getLdap().charValue() == '1') {
 
             userLDAP = new ActiveDirectory().comprobarUsuario(idUsuario, password);
 
@@ -81,15 +83,13 @@ public class AutenticaBFImpl implements AutenticaBF {
 
                 if ((userLDAP.getLogin().equalsIgnoreCase(idUsuario)) && (userLDAP.isPass())) {
 
-                    usuarioEntidad = usuarioRepositorio.findByIdUsuarioAndPassword(idUsuario, password);
-                    configuracionEntidad = configuracionRepositorio.findOne(1l);
+                    usuarioEntidad = usuarioRepositorio.findByIdUsuario(idUsuario);
 
                     user = mapper.usuarioEntidadToUsuarioDTO(usuarioEntidad);
                     configuracion = mapper.configuracionEntidadToConfiguracionDTO(configuracionEntidad);
 
 //                    user = mapperEntityBo.build().entityToBoU(usuarioEntidad);
 //                    configuracion = mapperEntityBo.build().entityToBo(configuracionEntidad);
-
                     sesion.setUsuario(user);
                     sesion.setConfiguracion(configuracion);
 
@@ -114,6 +114,18 @@ public class AutenticaBFImpl implements AutenticaBF {
                 sesion.setMensage("Error generado en la busqueda del usuario: " + idUsuario + " en LDAP ");
                 sesion.setDw4jException(new DW4JExcepcion("Error generado en la busqueda del usuario: " + idUsuario + " en LDAP "));
             }
+        } else {
+
+            usuarioEntidad = usuarioRepositorio.findByIdUsuario(idUsuario);
+
+            user = mapper.usuarioEntidadToUsuarioDTO(usuarioEntidad);
+            configuracion = mapper.configuracionEntidadToConfiguracionDTO(configuracionEntidad);
+
+//                    user = mapperEntityBo.build().entityToBoU(usuarioEntidad);
+//                    configuracion = mapperEntityBo.build().entityToBo(configuracionEntidad);
+            sesion.setUsuario(user);
+            sesion.setConfiguracion(configuracion);
+
         }
 
         return sesion;
@@ -151,7 +163,6 @@ public class AutenticaBFImpl implements AutenticaBF {
 
 //        user = mapperEntityBo.build().entityToBoU(usuarioEntidad);
 //        configuracion = mapperEntityBo.build().entityToBo(configuracionEntidad);
-
         sesion.setFechaHora(new UtilitarioFecha().convertLongDate(System.currentTimeMillis()));
         sesion.setIdSession(buscarIdSesion());
         sesion.setUsuario(user);
@@ -189,6 +200,11 @@ public class AutenticaBFImpl implements AutenticaBF {
         }
 
         return resp;
+    }
+
+    @Override
+    public List<Perfil> buscarLibreriaCategoriasPerfil(String usuario, String perfil) throws DW4JExcepcion {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

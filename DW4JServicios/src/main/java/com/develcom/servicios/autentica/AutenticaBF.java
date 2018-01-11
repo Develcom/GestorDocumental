@@ -6,6 +6,7 @@
 package com.develcom.servicios.autentica;
 
 import com.develcom.enlaces.DW4JExcepcion;
+import com.develcom.enlaces.Perfil;
 import com.develcom.enlaces.Sesion;
 import com.develcom.enlaces.Usuario;
 import java.util.List;
@@ -21,5 +22,7 @@ public interface AutenticaBF {
     List<Usuario> autocompletar() throws DW4JExcepcion;
 
     Sesion crearSesion(Usuario usuario) throws DW4JExcepcion;
+    
+    public List<Perfil> buscarLibreriaCategoriasPerfil(String usuario, String perfil) throws DW4JExcepcion;
     
 }
